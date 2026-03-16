@@ -40,23 +40,23 @@ export default function WlanConfig() {
 
             store.setEnable(devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].Enable?._value ?? false)
             store.setSsid(devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].SSID._value ?? "")
-            store.setPassword(devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].PreSharedKey[1].PreSharedKey._value ?? "")
+            store.setPassword(devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].PreSharedKey?.[1]?.PreSharedKey?._value ?? "")
 
             store.setWpaSec(
-                devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].WPAAuthenticationMode._value === "PSKAuthentication"
+                devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].WPAAuthenticationMode?._value === "PSKAuthentication"
                     ? "wpa2"
                     : "open"
             )
 
-            const possibleChannel = devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].PossibleChannels._value
+            const possibleChannel = devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].PossibleChannels?._value
             if (possibleChannel?.includes('-')) {
                 store.setPossibleChannel(Array.from({ length: parseInt(possibleChannel.split('-')[1]) }, (_, i) => i + 1))
             } else if (possibleChannel?.includes(',')) {
                 store.setPossibleChannel(possibleChannel.split(',').map(channel => parseInt(channel)))
             }
 
-            store.setChannel(devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].ChannelsInUse._value ?? 1)
-            store.setChannelAuto(devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].AutoChannelEnable._value ?? false)
+            store.setChannel(devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].ChannelsInUse?._value ?? 1)
+            store.setChannelAuto(devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].AutoChannelEnable?._value ?? false)
         }
     }, [data, store.index])
 

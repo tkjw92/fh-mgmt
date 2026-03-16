@@ -9,7 +9,11 @@ function Index() {
     const { data: devices = [] } = useQuery({
         queryKey: ["devicesQuery"],
         queryFn: async () => {
-            const req = await api.get<listDevicesSchema[]>("/devices");
+            const query = {
+                "_deviceId._Manufacturer": "FiberHome"
+            }
+
+            const req = await api.get<listDevicesSchema[]>("/devices/?query=" + encodeURIComponent(JSON.stringify(query)));
             return req.data;
         },
     })

@@ -42,9 +42,9 @@ export default function DeviceConfig() {
             store.setSn(devices._deviceId._SerialNumber)
             store.setUptime(devices.InternetGatewayDevice.DeviceInfo?.UpTime?._value ?? 0)
             store.setSuperUser(devices.InternetGatewayDevice.DeviceInfo?.X_FH_Account?.X_FH_WebUserInfo.WebSuperUsername._value ?? "")
-            store.setSuperPassword(devices.InternetGatewayDevice.DeviceInfo?.X_FH_Account.X_FH_WebUserInfo.WebSuperPassword._value ?? "")
-            store.setUser(devices.InternetGatewayDevice.DeviceInfo?.X_FH_Account.X_FH_WebUserInfo.WebUsername._value ?? "")
-            store.setPassword(devices.InternetGatewayDevice.DeviceInfo?.X_FH_Account.X_FH_WebUserInfo.WebPassword._value ?? "")
+            store.setSuperPassword(devices.InternetGatewayDevice.DeviceInfo?.X_FH_Account?.X_FH_WebUserInfo.WebSuperPassword._value ?? "")
+            store.setUser(devices.InternetGatewayDevice.DeviceInfo?.X_FH_Account?.X_FH_WebUserInfo.WebUsername._value ?? "")
+            store.setPassword(devices.InternetGatewayDevice.DeviceInfo?.X_FH_Account?.X_FH_WebUserInfo.WebPassword._value ?? "")
             store.setRemote(!!devices.InternetGatewayDevice.X_FH_ACL?.Rule[1])
         }
     }, [data])

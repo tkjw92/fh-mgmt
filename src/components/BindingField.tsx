@@ -17,7 +17,7 @@ export default function BindingField(
                 {[...Array(count)].map((_, i) => (
                     <label key={i} className="flex items-center gap-1.5 text-sm cursor-pointer">
                         <Checkbox
-                            checked={values.includes(`${param}.${i + 1}`)}
+                            checked={values?.includes(`${param}.${i + 1}`)}
                             onCheckedChange={() => toggle(`${param}.${i + 1}`)}
                             className="h-3.5 w-3.5"
                         />

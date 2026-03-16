@@ -63,8 +63,8 @@ export default function WanConfig() {
             store.setVlanEnabled(wanConf?.VLANEnable?._value)
             store.setVlanId(wanConf?.VLANID?._value)
             store.setLanBinding(wanConf?.X_FH_LanInterface?._value.split(","))
-            store.setLanSize(devices.InternetGatewayDevice.LANDevice?.[1]?.LANEthernetInterfaceNumberOfEntries._value ?? 0)
-            store.setWlanSize(devices.InternetGatewayDevice.LANDevice?.[1]?.LANWLANConfigurationNumberOfEntries._value ?? 0)
+            store.setLanSize(devices.InternetGatewayDevice.LANDevice?.[1]?.LANEthernetInterfaceNumberOfEntries?._value ?? 0)
+            store.setWlanSize(devices.InternetGatewayDevice.LANDevice?.[1]?.LANWLANConfigurationNumberOfEntries?._value ?? 0)
         }
     }, [data, setWan.isPending])
 
