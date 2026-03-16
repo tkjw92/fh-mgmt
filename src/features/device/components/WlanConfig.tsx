@@ -38,7 +38,7 @@ export default function WlanConfig() {
             const devices = data[0]
             store.setPossibleIndex(Array.from({ length: devices.InternetGatewayDevice.LANDevice?.[1]?.LANWLANConfigurationNumberOfEntries?._value ?? 0 }, (_, i) => i + 1))
 
-            store.setEnable(devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].Enable?._value ?? false)
+            store.setEnable(!!devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].Enable?._value)
             store.setSsid(devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].SSID._value ?? "")
             store.setPassword(devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].PreSharedKey?.[1]?.PreSharedKey?._value ?? "")
 
@@ -48,15 +48,17 @@ export default function WlanConfig() {
                     : "open"
             )
 
-            const possibleChannel = devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].PossibleChannels?._value
+            const possibleChannel = devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].PossibleChannels?._value ?? ""
             if (possibleChannel?.includes('-')) {
                 store.setPossibleChannel(Array.from({ length: parseInt(possibleChannel.split('-')[1]) }, (_, i) => i + 1))
             } else if (possibleChannel?.includes(',')) {
                 store.setPossibleChannel(possibleChannel.split(',').map(channel => parseInt(channel)))
+            } else {
+                store.setPossibleChannel([])
             }
 
             store.setChannel(devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].ChannelsInUse?._value ?? 1)
-            store.setChannelAuto(devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].AutoChannelEnable?._value ?? false)
+            store.setChannelAuto(!!devices.InternetGatewayDevice.LANDevice?.[1]?.WLANConfiguration[store.index].AutoChannelEnable?._value)
         }
     }, [data, store.index])
 

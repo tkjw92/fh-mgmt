@@ -56,14 +56,16 @@ export default function WanConfig() {
 
             store.setDetected(!!devices.InternetGatewayDevice.WANDevice[1].WANConnectionDevice[2])
             store.setStatus(wanConf?.ConnectionStatus?._value === "Connected")
-            store.setUsername(wanConf?.Username?._value)
-            store.setPassword(wanConf?.Password?._value)
-            store.setVlanEnabled(wanConf?.VLANEnable?._value)
-            store.setVlanId(wanConf?.VLANID?._value)
-            store.setLanBinding(wanConf?.X_FH_LanInterface?._value.split(","))
+            store.setUsername(wanConf?.Username?._value ?? "")
+            store.setPassword(wanConf?.Password?._value ?? "")
+            store.setVlanEnabled(!!wanConf?.VLANEnable?._value)
+            store.setVlanId(wanConf?.VLANID?._value ?? 0)
+            store.setLanBinding(wanConf?.X_FH_LanInterface?._value.split(",") ?? [])
             store.setLanSize(devices.InternetGatewayDevice.LANDevice?.[1]?.LANEthernetInterfaceNumberOfEntries?._value ?? 0)
             store.setWlanSize(devices.InternetGatewayDevice.LANDevice?.[1]?.LANWLANConfigurationNumberOfEntries?._value ?? 0)
         }
+
+        console.log(store);
     }, [data, setWan.isPending])
 
     return (
