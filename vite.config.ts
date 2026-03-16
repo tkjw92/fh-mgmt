@@ -16,7 +16,7 @@ export default defineConfig({
     proxy: {
       // Proxy requests that start with '/api'
       "/api": {
-        target: "http://192.168.24.3:7557", // the address of your backend server
+        target: "http://192.168.24.3/api", // the address of your backend server
         changeOrigin: true, // needed for the backend to receive requests from the correct origin
         rewrite: (path) => path.replace(/^\/api/, ""), // rewrite the path (optional, depends on backend setup)
       },

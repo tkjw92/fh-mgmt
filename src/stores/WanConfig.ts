@@ -40,7 +40,13 @@ export const useWanConfig = create<WanConfig>((set) => ({
   password: "",
   setPassword: (pass) => set({ password: pass }),
   vlanEnabled: false,
-  setVlanEnabled: (state) => set({ vlanEnabled: state }),
+  setVlanEnabled: (state) => {
+    if (!state) {
+      set({ vlanId: 0 });
+    }
+
+    set({ vlanEnabled: state });
+  },
   vlanId: 0,
   setVlanId: (vid) => set({ vlanId: vid }),
   lanBinding: [],

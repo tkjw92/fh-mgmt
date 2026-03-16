@@ -44,8 +44,6 @@ export default function WanConfig() {
                 toast.error("VLAN ID harus antara 1-4094")
                 return
             }
-        } else {
-            store.setVlanId(0)
         }
 
         setWan.mutate()
